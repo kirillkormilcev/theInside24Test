@@ -1,0 +1,57 @@
+version: '3.1'
+services:
+  server:
+    build: server
+    image: server-image
+    container_name: server-container
+    depends_on:
+      - token-service
+      - server-db
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://server-db:5432/server_db
+      - SPRING_DATASOURCE_USERNAME=server
+      - SPRING_DATASOURCE_PASSWORD=test
+
+  server-db:
+    image: postgres:14.4-alpine
+    container_name: server-db-container
+    volumes:
+      - server-db:/var/lib/postgresql/data
+    ports:
+      - "6544:5432"
+    environment:
+      - POSTGRES_DB=server_db
+      - POSTGRES_USER=server
+      - POSTGRES_PASSWORD=test
+
+  token-service:
+    build: token-service
+    image: token-service-image
+    container_name: token-service-container
+    depends_on:
+      - token-service-db
+    ports:
+      - "7070:7070"
+    environment:
+      ##- EXPLORE_WITH_ME_STATS_SERVER_URL=http://stats-server:9090
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://token-service-db:5432/token_service_db
+      - SPRING_DATASOURCE_USERNAME=token
+      - SPRING_DATASOURCE_PASSWORD=service
+
+  token-service-db:
+    image: postgres:14.4-alpine
+    container_name: token-service-db-container
+    volumes:
+      - token-service-db:/var/lib/postgresql/data
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_DB=token_service_db
+      - POSTGRES_USER=token
+      - POSTGRES_PASSWORD=service
+
+volumes:
+  token-service-db:
+  server-db:
