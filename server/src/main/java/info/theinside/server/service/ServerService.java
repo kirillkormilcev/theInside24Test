@@ -3,6 +3,7 @@ package info.theinside.server.service;
 import info.theinside.server.client.MyFeignClient;
 import info.theinside.server.client.dto.TokenResponse;
 import info.theinside.server.dto.MessageRequest;
+import info.theinside.server.dto.MessageResponse;
 import info.theinside.server.error.exception.BearerValidation;
 import info.theinside.server.error.exception.TokenValidation;
 import info.theinside.server.mapper.MessageMapper;
@@ -29,23 +30,29 @@ public class ServerService {
 
     @Transactional
     public Object addMessage(MessageRequest messageRequest, String bearerToken) {
+
         if (!bearerToken.isEmpty()
                 && !bearerToken.isBlank()
                 && bearerToken.contains("Bearer_")) {
             String token = bearerToken.substring(bearerToken.indexOf("_") + 1);
             TokenResponse tokenResponse = feignClient.checkAuthentication(token, messageRequest.getName());
+
             if (tokenResponse.getResponse().equals("correct token")) {
+
                 if (messageRequest.getMessage().contains("history ")) {
                     int size = Integer.parseInt(messageRequest.getMessage().substring(8));
                     List<Message> messages = messageRepository.findAllByName(messageRequest.getName(),
                             new PageRequestModified(0, size, Sort.by("id").descending()));
                     return messages.stream().map(MessageMapper::toMessageResponse).collect(Collectors.toList());
+
                 } else {
                     messageRepository.save(Message.builder()
                             .name(messageRequest.getName())
                             .message(messageRequest.getMessage())
                             .build());
-                    return "Сообщение сохранено.";
+                    return MessageResponse.builder()
+                            .message("Сообщение сохранено.")
+                            .build();
                 }
             } else {
                 throw new TokenValidation(tokenResponse.getResponse());

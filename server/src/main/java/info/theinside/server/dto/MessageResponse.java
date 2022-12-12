@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+@EqualsAndHashCode(of = "message")
 public class MessageResponse {
     @NotNull
     @NotBlank

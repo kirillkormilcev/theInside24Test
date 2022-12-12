@@ -30,8 +30,8 @@ public class TokenController {
 
     @GetMapping
     public ResponseEntity<TokenResponse> checkToken(
-           @RequestHeader("Authorization") String token,
-           @RequestParam("name") String name) {
+            @RequestHeader("Authorization") String token,
+            @RequestParam("name") String name) {
         log.info("Обработка эндпойнта GET/tokens/.(Header(Authorization): token, param: name)");
         return new ResponseEntity<>(tokenService.checkToken(token, name), HttpStatus.OK);
     }

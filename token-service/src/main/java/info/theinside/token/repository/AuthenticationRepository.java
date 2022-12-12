@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AuthenticationRepository extends JpaRepository<Authentication, Long> {
+
     Optional<Authentication> findByName(String name);
 }

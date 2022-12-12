@@ -3,6 +3,7 @@ package info.theinside.token.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

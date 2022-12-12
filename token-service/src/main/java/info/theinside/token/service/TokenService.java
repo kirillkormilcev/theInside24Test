@@ -30,15 +30,23 @@ public class TokenService {
         Authentication authentication = findAuthByName(jwtRequest.getName());
 
         if (authentication.getPassword().equals(jwtRequest.getPassword())) {
-            if (authentication.getToken() != null
-                    && jwtProvider.validateAccessToken(authentication.getToken().getToken())) {
-                return TokenMapper.toJwtResponse(authentication.getToken());
-            } else {
-                if (authentication.getToken() != null) {
+
+            if (authentication.getToken() != null) {
+
+                if (jwtProvider.validateAccessToken(authentication.getToken().getToken())) {
+                    return TokenMapper.toJwtResponse(authentication.getToken());
+
+                } else {
                     long oldTokenId = authentication.getToken().getId();
                     authentication.setToken(null);
                     tokenRepository.deleteById(oldTokenId);
+                    Token token = tokenRepository.save(Token.builder()
+                            .token(jwtProvider.generateAccessToken(authentication.getName()))
+                            .build());
+                    authentication.setToken(token);
+                    return TokenMapper.toJwtResponse(token);
                 }
+            } else {
                 Token token = tokenRepository.save(Token.builder()
                         .token(jwtProvider.generateAccessToken(authentication.getName()))
                         .build());
@@ -51,10 +59,11 @@ public class TokenService {
     }
 
     public TokenResponse checkToken(String token, String name) {
-        if (token != null
-                && jwtProvider.validateAccessToken(token)) {
+
+        if (token != null && jwtProvider.validateAccessToken(token)) {
             Claims claims = jwtProvider.getAccessClaims(token);
-            if(findAuthByName(claims.getSubject()).getName().equals(name)) {
+
+            if (findAuthByName(claims.getSubject()).getName().equals(name)) {
                 return TokenResponse.builder()
                         .response("correct token")
                         .build();

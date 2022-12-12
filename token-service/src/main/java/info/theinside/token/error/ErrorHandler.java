@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ErrorHandler {
 
     private List<String> logAndGetErrorsFromStackTrace(Exception e) {
         log.warn(e.getMessage(), e.getCause());
-        e.printStackTrace(); //todo: remove after debug
+        e.printStackTrace();
         return Arrays.stream(ExceptionUtils.getRootCauseStackTrace(e)).filter(f -> f.contains("info.theinside"))
                 .map((string) -> {
                     if (string.contains("\t")) {

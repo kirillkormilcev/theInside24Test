@@ -10,4 +10,3 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     List<Message> findAllByName(String name, PageRequest pageRequest);
 }
-
