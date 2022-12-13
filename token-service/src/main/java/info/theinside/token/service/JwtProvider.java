@@ -77,6 +77,5 @@ public class JwtProvider {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
     }
 }

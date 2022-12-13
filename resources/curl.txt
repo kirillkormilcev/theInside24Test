@@ -1,0 +1,47 @@
+запрос токена user 1
+curl.exe -X POST "http://localhost:7070/authenticate" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"password\": \"password1\"}'
+
+запрос токена user 2
+curl.exe -X POST "http://localhost:7070/authenticate" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"password\": \"password2\"}'
+
+добавление сообщения 01 от user 1
+(токен подставить из 1го запроса)
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"message\": \"message 01\"}'
+
+добавление сообщения 201 от user 2
+(токен подставить из 2го запроса)
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDIiLCJleHAiOjE2NzA5MjA3NjZ9.zSNC1NnjEiWsv3J45Kn0DcJNG4y_TCUf5S06v5aM6O-OpbA5VfMpNqqT_OjE_3O6oX8lUdxuGN4kwzMAR5QDsQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 201\"}'
+
+добавление сообщения 02 от user 1
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"message\": \"message 02\"}'
+
+добавление сообщения 202 от user 2
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDIiLCJleHAiOjE2NzA5MjA3NjZ9.zSNC1NnjEiWsv3J45Kn0DcJNG4y_TCUf5S06v5aM6O-OpbA5VfMpNqqT_OjE_3O6oX8lUdxuGN4kwzMAR5QDsQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 202\"}'
+
+добавление сообщения 04 от user 1
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"message\": \"message 04\"}'
+
+добавление сообщения 204 от user 2
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDIiLCJleHAiOjE2NzA5MjA3NjZ9.zSNC1NnjEiWsv3J45Kn0DcJNG4y_TCUf5S06v5aM6O-OpbA5VfMpNqqT_OjE_3O6oX8lUdxuGN4kwzMAR5QDsQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 204\"}'
+
+добавление сообщения 05 от user 1
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"message\": \"message 05\"}'
+
+добавление сообщения 205 от user 2
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDIiLCJleHAiOjE2NzA5MjA3NjZ9.zSNC1NnjEiWsv3J45Kn0DcJNG4y_TCUf5S06v5aM6O-OpbA5VfMpNqqT_OjE_3O6oX8lUdxuGN4kwzMAR5QDsQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 205\"}'
+
+запрос 10 сообщений от user 1
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 1\",\"message\": \"history 10\"}'
+
+запрос 8 сообщений от user 2
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDIiLCJleHAiOjE2NzA5MjA3NjZ9.zSNC1NnjEiWsv3J45Kn0DcJNG4y_TCUf5S06v5aM6O-OpbA5VfMpNqqT_OjE_3O6oX8lUdxuGN4kwzMAR5QDsQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"history 8\"}'
+
+
+попытка добавление сообщения от не существующего пользователя с валидным токеном
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 100\",\"message\": \"message 06\"}'
+
+попытка добавление сообщения от существующего пользователя с токеном другого существующего пользователя
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQ" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 206\"}'
+
+попытка добавление сообщения от существующего пользователя с не валидным токеном
+curl.exe -X POST "http://localhost:9090/message" -H "Authorization: Bearer_eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIDEiLCJleHAiOjE2NzA5MjA3MjN9.kUar1rzlgh7xo4VMpCcUR29S6GDct8ZBV7ihQZAk8tducHc6FqMk7do6xD-w9QWiHTGbDQ2Od-CguGsahthMLQwrong" -H "Content-Type: application/json" -d '{\"name\": \"user 2\",\"message\": \"message 206\"}'
